@@ -12,10 +12,10 @@ import array
 # Variables & Setup
 
 video_capture = cv2.VideoCapture(0) # Get a reference to the webcam
-client = FaunaClient(secret="fnADwLZiwWACBmx5g5lkKxf-7ERVaw3MSqpqWcWG") # Connection To Fauna
+client = FaunaClient(secret="YOUR_SECRET_HERE") # Connection To Fauna
 indexdata = client.query(
     q.paginate(
-    q.match(q.index('allusers')))
+    q.match(q.index('YOUR_INDEX_HERE')))
  )
 idlist=[indexdata['data']]
 result = re.findall('\d+', str(idlist))
@@ -27,7 +27,7 @@ for i in range(0, len(result)):
     # print(result[i])
 
     currentuserid = result[i]
-    userdetails = client.query(q.get(q.ref(q.collection('Users'), currentuserid)))
+    userdetails = client.query(q.get(q.ref(q.collection('YOUR_COLLECTION_HERE'), currentuserid)))
 
     details_list=[userdetails['data']]
 
